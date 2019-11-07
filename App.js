@@ -1,11 +1,11 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
-import login from './src/pages/login';
+import cadastro from './src/pages/cadastro';
 
 const AppNavigator = createStackNavigator({
 
-  'PagLogin': {
-    screen: login,
+  'PagCadastro': {
+    screen: cadastro,
     navigationOptions: {
       headerTransparent: 'false'
     }

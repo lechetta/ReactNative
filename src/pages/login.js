@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
+import { View, Image, StyleSheet, TextInput, TouchableOpacity, Text, Dimensions } from 'react-native';
 import FormRow from '../components/FormRow';
 
 
@@ -23,7 +23,8 @@ export default class login extends Component {
     render() {
         return (
             <View style={styles.Container}>
-                <View style={{ backgroundColor: '#E0E0E0', height: 100 }}>
+                <View style={{ backgroundColor: '#f28d5e', height: 100 }}>
+
 
                     <View style={styles.avatar}>
                         <Image
@@ -32,83 +33,85 @@ export default class login extends Component {
                         />
 
                     </View>
-                    <FormRow>
-                        <TextInput
-                            keyboardType='email-address'
-                            //defaultValue={this.state.value}
-                            // onChangeText={this.handleChangeText}
-                            placeholder="Email"
-
-                        />
-                    </FormRow>
-                    <FormRow>
-
-                        <TextInput
-                            secureTextEntry={true}
-                            placeholder="Senha"
-                        />
-                    </FormRow>
-                    <Text
-                        style={styles.forgot}
-                        accessibilityRole='link'
-                    >
-                        ESQUECI A SENHA
-
-                        </Text>
-
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={this.onPressButton}
-                    /*criando botao de login*/
-                    >
-                        <Text style={styles.TextBotao}> Login </Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={this.onPressButton}
-
-                    /*crinado botao do facebook */
-                    >
-                        <Image
-                            style={styles.Image}
-                            source={require('../../assets/facebook.png')}
-
-
-                        />
-                        <Text style={{ color: 'blue', fontSize: 20, marginTop: 5, fontWeight: '500' }}> Entrar com Facebook </Text>
-
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={this.onPressButton}
-
-
-                    /*crinado botao do google */
-                    >
-                        <Image
-                            style={styles.Image}
-                            source={require('../../assets/google.png')}
-
-                        />
-                        <Text style={{ color: 'red', fontSize: 20, marginTop: 5, fontWeight: '500' }}> Entrar com Email </Text>
-                    </TouchableOpacity>
-
-                    <Text
-                        style={{ alignSelf: 'center', margin: 10, fontWeight: '800' }}
-                        accessibilityRole='link'
-                    >
-                        CADASTRE-SE
-
-                        </Text>
                 </View>
+                <FormRow>
+                    <TextInput
+                        keyboardType='email-address'
+                        //defaultValue={this.state.value}
+                        // onChangeText={this.handleChangeText}
+                        placeholder="Email"
+
+                    />
+                </FormRow>
+                <FormRow>
+
+                    <TextInput
+                        secureTextEntry={true}
+                        placeholder="Senha"
+                    />
+                </FormRow>
+                <Text
+                    style={styles.forgot}
+                    accessibilityRole='link'
+                >
+                    ESQUECI A SENHA
+
+                        </Text>
+
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={this.onPressButton}
+                /*criando botao de login*/
+                >
+                    <Text style={styles.TextBotao}> Login </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={this.onPressButton}
+
+                /*crinado botao do facebook */
+                >
+                    <Image
+                        style={styles.Image}
+                        source={require('../../assets/facebook.png')}
+
+
+                    />
+                    <Text style={{ color: 'blue', fontSize: 20, marginTop: 5, fontWeight: '500' }}> Entrar com Facebook </Text>
+
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={this.onPressButton}
+
+
+                /*crinado botao do google */
+                >
+                    <Image
+                        style={styles.Image}
+                        source={require('../../assets/google.png')}
+
+                    />
+                    <Text style={{ color: 'red', fontSize: 20, marginTop: 5, fontWeight: '500' }}> Entrar com Email </Text>
+                </TouchableOpacity>
+
+                <Text
+                    style={{ alignSelf: 'center', margin: 10, fontWeight: '800' }}
+                    accessibilityRole='link'
+                >
+                    CADASTRE-SE
+
+                        </Text>
+
 
             </View >
         );
     }
 }
 
+const widthWindow = Dimensions.get('window').width;
 const styles = StyleSheet.create({
 
     Container: {
@@ -117,7 +120,7 @@ const styles = StyleSheet.create({
     },
     avatar: {
         alignItems: 'center',
-        marginTop: 50,
+        marginTop: 30,
     },
     forgot: {
         alignSelf: 'flex-end',
@@ -127,7 +130,7 @@ const styles = StyleSheet.create({
 
     },
     button: {
-        width: 250,
+        width: widthWindow - 50,
         backgroundColor: 'white',
         padding: 10,
         margin: 10,
