@@ -1,30 +1,39 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, Dimensions, Picker } from 'react-native';
+import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, Dimensions, Picker, alert, Alert } from 'react-native';
 import FormRow from '../components/FormRow';
-import { withFormik } from 'formik';
+
 
 export default class cadastro extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            TextInputLocal: '',
+            TextInputTelefone: '',
+            TextInputRua: '',
+            TextInputNumero: ''
+        };
+
+        this.onChange = this.onChange.bind(this);
+        this.CheckTextInput = this.CheckTextInput.bind(this);
+    }
+
+    onChange(key, value) {
+        this.setState({ TextInputLocal: value })
+    }
+
+    CheckTextInput() {
+        var TextinputLocal = this.state.TextInputLocal;
+        const TextInputTelefone = this.state.TextInputTelefone;
+        const TextInputRua = this.state.TextInputRua;
+        const TextInputNumero = this.state.TextInputNumero;
+
+
+        if (TextinputLocal == '' || TextInputTelefone == '' || TextInputRua == '' || TextInputNumero == '') {
+            Alert.alert('digite todos os valores');
+        } else {
+            Alert.alert('todos preenchidos');
         }
-        // this.handleChange = this.handleChange.bind(this);
     }
-
-    handleChange(event = {}) {
-        //  const name = event.target && event.target.name;
-        // const value = event.target && event.target.value;
-
-        // this.setState([name], value);
-    }
-
-    onPressButton() {
-
-
-    }
-
-
-
 
     render() {
         return (
@@ -44,9 +53,8 @@ export default class cadastro extends Component {
                 <View style={styles.campo}>
                     <FormRow>
                         <TextInput
-                            //name="local"
-                            // onChangeText={this.handleChange}
-                            // value={this.state.local}
+                            value={this.state.TextInputLocal}
+                            onChangeText={value => this.onChange('TextInputLocal', value)}
                             placeholder="insira o nome do local"
 
                         />
@@ -69,16 +77,22 @@ export default class cadastro extends Component {
 
                     <FormRow>
                         <TextInput
+                            value={this.state.TextInputTelefone}
+                            onChangeText={value => this.onChange('TextInputTelefone', value)}
                             placeholder="Telefone"
                         />
                     </FormRow>
                     <FormRow>
                         <TextInput
+                            value={this.state.TextInputRua}
+                            onChangeText={value => this.onChange('TextInputRua', value)}
                             placeholder="Nome da rua"
                         />
                     </FormRow>
                     <FormRow>
                         <TextInput
+                            value={this.state.TextInputNumero}
+                            onChangeText={value => this.onChange('TextInputNumero', value)}
                             placeholder="numero"
                             keyboardType='numeric'
                         />
@@ -87,7 +101,7 @@ export default class cadastro extends Component {
 
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={this.onPressButton}
+                        onPress={this.CheckTextInput}
                     /*Criar*/
                     >
                         <Text style={styles.TextBotao}> Cadastrar </Text>
@@ -151,23 +165,4 @@ const styles = StyleSheet.create({
 
     }
 
-})
-const enhaceWithFormik = withFormik({
-    mapPropsToValues: () => ({ local: '', telefone: '', rua: '', numero: '' }),
-    validate: values => {
-        const { local, telefone, rua, numero } = values
-        const errors = {}
-
-        if (!local) errors.local = 'informa o local!'
-
-        if (!telefone) errors.telefone = 'informe um numero de telefone!'
-
-        if (!rua) errors.rua = 'informe o nome da rua'
-
-        if (!numero) errors.numero = 'informe o numero do seu estabelecimento'
-
-        return errors
-
-
-    }
 })
