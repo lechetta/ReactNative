@@ -1,11 +1,11 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
-import cadastro from './src/pages/cadastro';
+import CadPessoa from './src/pages/CadPessoa';
 
 const AppNavigator = createStackNavigator({
 
-  'PagCadastro': {
-    screen: cadastro,
+  'PagCadPessoa': {
+    screen: CadPessoa,
     navigationOptions: {
       headerTransparent: 'false'
     }
@@ -17,4 +17,3 @@ const AppNavigator = createStackNavigator({
 
 const AppContainer = createAppContainer(AppNavigator);
 export default AppContainer;
-

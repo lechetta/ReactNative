@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, Dimensions, Picker, alert, Alert } from 'react-native';
+import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, Dimensions, Picker, alert, Alert, CheckBox } from 'react-native';
 import FormRow from '../components/FormRow';
 
 
@@ -10,7 +10,8 @@ export default class cadastro extends Component {
             TextInputLocal: '',
             TextInputTelefone: '',
             TextInputRua: '',
-            TextInputNumero: ''
+            TextInputNumero: '',
+            language: ''
         };
 
         this.onChange = this.onChange.bind(this);
@@ -18,22 +19,33 @@ export default class cadastro extends Component {
     }
 
     onChange(key, value) {
-        this.setState({ TextInputLocal: value })
+        this.setState({ TextInputLocal: value });
+        this.setState({ TextInputTelefone: value });
+        this.setState({ TextInputRua: value });
+        this.setState({ TextInputNumero: value });
+        this.setState({ language: value });
+
     }
 
     CheckTextInput() {
-        var TextinputLocal = this.state.TextInputLocal;
+        const TextinputLocal = this.state.TextInputLocal;
         const TextInputTelefone = this.state.TextInputTelefone;
         const TextInputRua = this.state.TextInputRua;
         const TextInputNumero = this.state.TextInputNumero;
+        const language = this.state.language;
 
-
-        if (TextinputLocal == '' || TextInputTelefone == '' || TextInputRua == '' || TextInputNumero == '') {
-            Alert.alert('digite todos os valores');
+        if (TextinputLocal == '' || TextInputRua == '' || TextInputNumero == '' || TextInputTelefone == '') {
+            Alert.alert('Preencha todos os campos!');
+        } else if (this.state.TextInputTelefone.length < 8) {
+            Alert.alert('Número de telefone inválido!');
+        } else if (language == '-selecione-') {
+            Alert.alert('Voce deve selecionar uma modalidade')
         } else {
-            Alert.alert('todos preenchidos');
+            Alert.alert('Sucesso!');
+            //gravar no banco
         }
     }
+
 
     render() {
         return (
@@ -53,7 +65,7 @@ export default class cadastro extends Component {
                 <View style={styles.campo}>
                     <FormRow>
                         <TextInput
-                            value={this.state.TextInputLocal}
+                            //value={this.state.TextInputLocal}
                             onChangeText={value => this.onChange('TextInputLocal', value)}
                             placeholder="insira o nome do local"
 
@@ -66,6 +78,7 @@ export default class cadastro extends Component {
                             onValueChange={(itemValue, itemIndex) =>
                                 this.setState({ language: itemValue })
                             }>
+                            <Picker.Item label="-selecione-" value="-selecione-" />
                             <Picker.Item label="Lanchonete" value="Lanchonete" />
                             <Picker.Item label="Distribuidora" value="Distribuidora" />
                             <Picker.Item label="Restaurante" value="Restaurante" />
@@ -77,21 +90,26 @@ export default class cadastro extends Component {
 
                     <FormRow>
                         <TextInput
-                            value={this.state.TextInputTelefone}
+                            //value={this.state.TextInputTelefone}
+                            // type={'cel-phone'}
+                            // options={{
+                            //     dddMask: '+99 99 '
+                            //  }}
                             onChangeText={value => this.onChange('TextInputTelefone', value)}
                             placeholder="Telefone"
+                            keyboardType='numeric'
                         />
                     </FormRow>
                     <FormRow>
                         <TextInput
-                            value={this.state.TextInputRua}
+                            //value={this.state.TextInputRua}
                             onChangeText={value => this.onChange('TextInputRua', value)}
                             placeholder="Nome da rua"
                         />
                     </FormRow>
                     <FormRow>
                         <TextInput
-                            value={this.state.TextInputNumero}
+                            //value={this.state.TextInputNumero}
                             onChangeText={value => this.onChange('TextInputNumero', value)}
                             placeholder="numero"
                             keyboardType='numeric'
@@ -133,8 +151,6 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
         alignSelf: 'center',
         flexDirection: 'row',
-
-        //cor ver 4dba3a
     },
     Image: {
         width: 40,

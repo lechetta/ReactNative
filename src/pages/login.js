@@ -8,13 +8,9 @@ export default class login extends Component {
         super(props);
         this.state = {
         }
-        //this.handleChangeText = this.handleChangeText.bind(this)
+
     }
-    // handleChangeText(newText) {
-    // this.setState({
-    //    value: newText
-    //})
-    // }
+
     onPressButton() {
         alert.alert('clicou');
     }
