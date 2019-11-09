@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, Dimensions, Picker, alert, Alert, CheckBox } from 'react-native';
 import FormRow from '../components/FormRow';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Button from '../components/Button';
+
 
 
 export default class cadastro extends Component {
@@ -36,9 +39,11 @@ export default class cadastro extends Component {
 
         if (TextinputLocal == '' || TextInputRua == '' || TextInputNumero == '' || TextInputTelefone == '') {
             Alert.alert('Preencha todos os campos!');
-        } else if (this.state.TextInputTelefone.length < 8) {
+        }
+        if (this.state.TextInputTelefone.length < 8) {
             Alert.alert('Número de telefone inválido!');
-        } else if (language == '-selecione-') {
+        }
+        if (language == '-selecione-') {
             Alert.alert('Voce deve selecionar uma modalidade')
         } else {
             Alert.alert('Sucesso!');
@@ -50,17 +55,20 @@ export default class cadastro extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}> ESTABELECIMENTO </Text>
-                <View style={{ backgroundColor: '#f28d5e', height: 70, marginTop: 10 }}>
+                <View style={styles.top}>
+                    <Image
+                        style={styles.seta}
+                        source={require('../../assets/ArrowIcon.png')}
+                    />
 
-                    <View style={styles.avatar}>
-                        <Image
-                            style={{ width: 100, height: 100 }}
-                            source={require('../../assets/avatar.png')}
-                        />
-                    </View>
+                    <Text style={styles.title}> ESTABELECIMENTO </Text>
                 </View>
-
+                <View style={styles.barra}>
+                    <Image
+                        style={styles.avatar}
+                        source={require('../../assets/avatar2.png')}
+                    />
+                </View>
 
                 <View style={styles.campo}>
                     <FormRow>
@@ -116,13 +124,9 @@ export default class cadastro extends Component {
                         />
                     </FormRow>
 
-
                     <TouchableOpacity
-                        style={styles.button}
-                        onPress={this.CheckTextInput}
-                    /*Criar*/
-                    >
-                        <Text style={styles.TextBotao}> Cadastrar </Text>
+                        onPress={this.CheckTextInput}>
+                        <Button><Text style={styles.TextBotao}>Cadastrar</Text></Button>
                     </TouchableOpacity>
                 </View>
             </View >
@@ -136,37 +140,60 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
     },
-    avatar: {
-        alignItems: 'center',
-        marginTop: -40,
-    },
-    button: {
-        width: widthWindow - 50,
-        backgroundColor: '#f28d5e',
-        padding: 10,
-        margin: 10,
-        justifyContent: 'space-evenly',
-        borderRadius: 8,
-        elevation: 4,
-        alignItems: 'stretch',
-        alignSelf: 'center',
+    top: {
+        width: wp('100%'),
+        height: hp('7%'),
+        marginTop: ('0%'),
         flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        marginTop: ('5%')
     },
-    Image: {
-        width: 40,
-        height: 40,
-        position: 'relative',
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
+    seta: {
+        width: wp('10%'),
+        height: hp('5%'),
+        marginTop: ('-3%'),
+        alignSelf: 'flex-start',
+        marginTop: ('3%'),
+        color: 'white',
+        textShadowColor: '#919191',
+        textShadowOffset: { width: 0.8, height: 0.8 },
+        textShadowRadius: 6,
+        alignSelf: 'center'
 
     },
     title: {
-        alignSelf: 'center',
-        margin: 30,
         fontSize: 25,
         fontWeight: '800',
         color: 'black',
+        marginTop: ('3%'),
+        color: 'black',
+        textShadowColor: '#919191',
+        textShadowOffset: { width: 0.8, height: 0.8 },
+        textShadowRadius: 6,
+        alignSelf: 'center'
 
+    },
+    barra: {
+        backgroundColor: '#f28d5e',
+        width: wp('100%'),
+        height: hp('8%'),
+        marginTop: ('10%'),
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-evenly'
+    },
+    avatar: {
+        width: wp('30%'),
+        height: hp('18%'),
+        marginTop: ('-10%'),
+        borderRadius: 100
+    },
+
+    campo: {
+        margin: 10,
+        width: wp('90%'),
+        alignSelf: 'center'
     },
     TextBotao: {
         color: 'white',
@@ -174,11 +201,7 @@ const styles = StyleSheet.create({
         textShadowColor: '#919191',
         textShadowOffset: { width: 0.8, height: 0.8 },
         textShadowRadius: 6,
-    },
-    campo: {
-        // backgroundColor: '#ededed',
-        margin: 15
-
+        alignSelf: 'center'
     }
 
 })
